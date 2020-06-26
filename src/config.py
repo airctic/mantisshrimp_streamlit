@@ -1,6 +1,6 @@
 # This is the only file which user should edit to get his job done.
 
-APP_NAME = "object_detection_app.py"
+APP_NAME = "src/object_detection_app.py"
 
 # Path to Image that you want to predict
 # IMAGE_PATH = "images/index.jpg"
