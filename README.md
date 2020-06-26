@@ -1,2 +1,3 @@
-# mantisshrimp_streamlit
-Streamlit demo for mantisshrimp object detection framework
+# Sreamlit Demo With Mantisshrimp
+
+- Developed Using Pytorch and Mantisshrimp on Pets Dataset.
