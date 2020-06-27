@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run --server.enableCORS false --server.port $PORT src/object_detection_app.py
+web: sh setup.sh && streamlit run src/object_detection_app.py
