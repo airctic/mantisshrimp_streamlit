@@ -8,8 +8,12 @@ APP_NAME = "src/object_detection_app.py"
 # URL To Image that you would like to predict
 IMAGE_URL = ""
 
-MODEL_PATH = "data/fake_model.pt"
+MODEL_PATH = "data/actual_model.pt"
+NUM_CLASSES = 4 # Hyperparameters of model
+# Note this might be diffrent from len(OBJECTS_TO_DETECT) as you may have an extra background class.
+IMG_SIZE = (224, 224) # If you need a image size
+
 
 # Optionally the user can simply provide classes which the model was trained on
-OBJECTS_TO_DETCT = ["Dog", "Cat", "Panda"]
+OBJECTS_TO_DETECT = ["Dog", "Cat", "Panda"]
 

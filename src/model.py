@@ -10,14 +10,12 @@ import streamlit as st
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
+# This is to be done with mantisshrimp 
 # Initialize the mantisshirmp model and return it.
 def create_model():
     # model = mantisshirmp.something.something()
     model = None
-
     return model
-
-
 
 # Loading is constant code no edits needed
 @st.cache(allow_output_mutation=True)
@@ -32,16 +30,18 @@ def load_model(model_path):
 # Forward pass from the model
 # This code might need customizations from user side.    
 @st.cache(allow_output_mutation=True)
-def predict(model, image_batch, confidence_threshold):
+def predict(model, image_batch, confidence_threshold, overlap_threshold):
     # Very important to set it to no_grad
     with torch.no_grad():
-        prediction = model(image_batch)
-    
-    for pred in prediction:
-        boxes = pred['boxes'].data.cpu().numpy()
-        labels = pred['labels'].data.cpu().numpy()
-        scores = pred['scores'].data.cpu().numpy()
-    
+        prediction = model(image_batch)[0] # Maybe 0 is needed verify once.
+        selected = prediction["scores"] > confidence_threshold
+        predictions = {k: v[selected] for k, v in prediction.items()}
+        
+        for pred in predictions:
+            boxes = pred['boxes'].data.cpu().numpy()
+            labels = pred['labels'].data.cpu().numpy()
+            scores = pred['scores'].data.cpu().numpy()
+
     # Perform NMS and confidence thresholding.
     # Once we know what to draw we can use the utility to simply draw the box
     
