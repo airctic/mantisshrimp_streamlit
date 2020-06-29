@@ -27,7 +27,7 @@ if __name__ == "__main__":
     # A simple streamlit demo is what we want.
     # Features of the demo
     # Get the readme text from readme file
-    readme_text = st.markdown(get_file_content_as_string("README.md"))
+    readme_text = st.markdown(get_file_content_as_string("src/Info.md"))
     # print(readme_text)
     # Download the model or use from system.
     download_file(config.MODEL_PATH)
