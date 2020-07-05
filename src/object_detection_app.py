@@ -1,4 +1,5 @@
 import streamlit as st
+from zipfile import ZipFile 
 import zipfile
 import numpy as np
 import config
@@ -56,15 +57,16 @@ if __name__ == "__main__":
         
         # Download the model or use from system.
         download_file(config.MODEL_BUCKET_URL, config.SAVE_PATH)
-        # Load Pytorch model here
-        # model = load_model(config.MODEL_PATH)
-
         confidence_threshold, overlap_threshold = object_detector_ui()
         object_type, min_objs, max_objs = object_selector_ui()
 
         if(zipfile.is_zipfile(config.SAVE_PATH)):
-            zip.extract(config.SAVE_PATH)
-
+            with zipfile.ZipFile(config.SAVE_PATH, 'r') as zip: 
+                zip.extractall(config.DATA_PATH) 
+        
+        # Load Pytorch model here
+        # model = load_model(config.MODEL_PATH)
+        
         # Create an option to run demo images.
         st.write("# Upload an Image to get its predictions")
 
