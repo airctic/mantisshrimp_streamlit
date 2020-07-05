@@ -1,7 +1,10 @@
 # data files
-data/actual_model.pt
-data/lucas_model.pt
+# data/actual_model.pt
+# data/lucas_model.pt
+*.pth
+*.pt
 src/crash_test.py
+*.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

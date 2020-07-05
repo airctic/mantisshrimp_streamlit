@@ -1,4 +1,5 @@
 import streamlit as st
+import zipfile
 import numpy as np
 import config
 import os, urllib, cv2
@@ -32,11 +33,7 @@ if __name__ == "__main__":
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
     readme_text = st.markdown(get_file_content_as_string("src/Info.md"))
     # print(readme_text)
-    # Download the model or use from system.
-    download_file(config.SAVE_PATH, config.MODEL_PATH)
-
-    # Load Pytorch model here
-    # model = load_model(config.MODEL_PATH)
+    
     
     # Once we have the dependencies, add a selector for the app mode on the sidebar.
     st.sidebar.title("What to do")
@@ -54,11 +51,20 @@ if __name__ == "__main__":
         readme_text.empty()
         st.write("# Running the object detection App")
         st.write("- Adjust the thresholds, Upload a file and click predict")
+        st.write("- It might take time to download the model.")
         # run_the_app()
-    
+        
+        # Download the model or use from system.
+        download_file(config.MODEL_BUCKET_URL, config.SAVE_PATH)
+        # Load Pytorch model here
+        # model = load_model(config.MODEL_PATH)
+
         confidence_threshold, overlap_threshold = object_detector_ui()
         object_type, min_objs, max_objs = object_selector_ui()
-        
+
+        if(zipfile.is_zipfile(config.SAVE_PATH)):
+            zip.extract(config.SAVE_PATH)
+
         # Create an option to run demo images.
         st.write("# Upload an Image to get its predictions")
 
