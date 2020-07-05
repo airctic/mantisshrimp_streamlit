@@ -1,5 +1,6 @@
 # data files
 data/actual_model.pt
+data/lucas_model.pt
 src/crash_test.py
 
 # Byte-compiled / optimized / DLL files

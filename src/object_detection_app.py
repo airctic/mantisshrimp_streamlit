@@ -33,7 +33,7 @@ if __name__ == "__main__":
     readme_text = st.markdown(get_file_content_as_string("src/Info.md"))
     # print(readme_text)
     # Download the model or use from system.
-    download_file(config.MODEL_PATH)
+    download_file(config.SAVE_PATH, config.MODEL_PATH)
 
     # Load Pytorch model here
     # model = load_model(config.MODEL_PATH)
@@ -59,6 +59,7 @@ if __name__ == "__main__":
         confidence_threshold, overlap_threshold = object_detector_ui()
         object_type, min_objs, max_objs = object_selector_ui()
         
+        # Create an option to run demo images.
         st.write("# Upload an Image to get its predictions")
 
         img_file_buffer = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
@@ -66,7 +67,8 @@ if __name__ == "__main__":
             image = Image.open(img_file_buffer)
             image = np.array(image) # Just for now
             pred_image = load_image_tensor(img_file_buffer, device)
-            # output = predict(model, pred_image, confidence_threshold, overlap_threshold)
+            # output = predict(model, pred_image, , overlap_threshold)
+            # preds = model.predict(images, detection_threshold=confidence_threshold)
             # Complete the predict code.
 
             if image is not None:

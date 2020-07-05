@@ -63,9 +63,9 @@ def load_image_file(image_path):
     return image
 
 # Utility to beautifully download a file from its url
-def download_file(file_path):
+def download_file(file_path, save_path):
     # Don't download the file twice. (If possible, verify the download using the file length.)
-    if os.path.exists(file_path):
+    if os.path.exists(save_path):
         return
     else:
         # Download from the url
@@ -74,7 +74,7 @@ def download_file(file_path):
         try:
             weights_warning = st.warning("Downloading %s..." % file_path)
             progress_bar = st.progress(0)
-            with open(file_path, "wb") as output_file:
+            with open(save_path, "wb") as output_file:
                 with urllib.request.urlopen(file_path) as response:
                     length = int(response.info()["Content-Length"])
                     counter = 0.0

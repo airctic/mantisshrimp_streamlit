@@ -8,7 +8,8 @@ APP_NAME = "src/object_detection_app.py"
 # URL To Image that you would like to predict
 IMAGE_URL = ""
 
-MODEL_PATH = "data/actual_model.pt"
+SAVE_PATH = "https://mantisshrimp-models.s3.us-east-2.amazonaws.com/weights-384px-adam2%2B%2B.pth.zip"
+MODEL_PATH = "data/lucas_model.pth.zip"
 NUM_CLASSES = 4 # Hyperparameters of model
 # Note this might be diffrent from len(OBJECTS_TO_DETECT) as you may have an extra background class.
 IMG_SIZE = (224, 224) # If you need a image size
