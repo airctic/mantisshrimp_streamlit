@@ -62,7 +62,7 @@ if __name__ == "__main__":
         confidence_threshold, overlap_threshold = object_detector_ui()
         object_type, min_objs, max_objs = object_selector_ui()
 
-        if not os.exists(config.MODEL_PATH):
+        if not os.path.exists(config.MODEL_PATH):
             if(zipfile.is_zipfile(config.SAVE_PATH)):
                 with zipfile.ZipFile(config.SAVE_PATH, 'r') as zip: 
                     zip.extractall(config.DATA_PATH) 
@@ -71,7 +71,7 @@ if __name__ == "__main__":
             # Just load an image from sample_images folder
             random_image = random.choice(config.SAMPLE_IMAGES)
             st.image(random_image)
-            image = Image.open(random_immage)
+            image = Image.open(random_image)
             image = np.array(image)
 
         st.write("# Upload an Image to get its predictions")

@@ -3,7 +3,7 @@
 # If user knows the model he has created, he can simply make use of create_model here
 
 
-from mantisshrimp.models.mantis_rcnn import MantisFasterRCNN
+# from mantisshrimp.models.mantis_rcnn import MantisFasterRCNN
 import torch
 import config
 import utils
@@ -48,6 +48,7 @@ def predict(model, image_batch, confidence_threshold, overlap_threshold):
     # Perform NMS.
     # Once we know what to draw we can use the utility to simply draw the box
     # Just display this image
+    return preds
 
 
 
