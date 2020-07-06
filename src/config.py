@@ -11,8 +11,13 @@ IMAGE_URL = ""
 MODEL_BUCKET_URL = "https://mantisshrimp-models.s3.us-east-2.amazonaws.com/weights-384px-adam2%2B%2B.pth.zip"
 SAVE_PATH = "data/demo_model.pth.zip"
 DATA_PATH = "data/"
+MODEL_PATH = "data//weights-384px-adam2++.pth"
 
-NUM_CLASSES = 4 # Hyperparameters of model
+# Some sample images over internet that you may like to give. Enter urls of images here.
+SAMPLE_IMAGES = ["sample_images//cat0.jpg", "sample_images//cat1.jpg", 
+"sample_images//cat2.jpg", "sample_images//dog0.jpg", "sample_images//dog1.jpg"]
+
+NUM_CLASSES = 38 # Hyperparameters of model
 # Note this might be diffrent from len(OBJECTS_TO_DETECT) as you may have an extra background class.
 IMG_SIZE = (224, 224) # If you need a image size
 

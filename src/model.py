@@ -3,8 +3,9 @@
 # If user knows the model he has created, he can simply make use of create_model here
 
 
-# import mantisshrimp
+from mantisshrimp.models.mantis_rcnn import MantisFasterRCNN
 import torch
+import config
 import utils
 import streamlit as st
 
@@ -14,7 +15,7 @@ device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cp
 # Initialize the mantisshirmp model and return it.
 def create_model():
     # model = mantisshirmp.something.something()
-    model = None
+    model = MantisFasterRCNN(num_classes=config.NUM_CLASSES)
     return model
 
 # Loading is constant code no edits needed
@@ -32,19 +33,21 @@ def load_model(model_path):
 @st.cache(allow_output_mutation=True)
 def predict(model, image_batch, confidence_threshold, overlap_threshold):
     # Very important to set it to no_grad
-    with torch.no_grad():
-        prediction = model(image_batch)[0] # Maybe 0 is needed verify once.
-        selected = prediction["scores"] > confidence_threshold
-        predictions = {k: v[selected] for k, v in prediction.items()}
+    # with torch.no_grad():
+    #     prediction = model(image_batch)[0] # Maybe 0 is needed verify once.
+    #     selected = prediction["scores"] > confidence_threshold
+    #     predictions = {k: v[selected] for k, v in prediction.items()}
         
-        for pred in predictions:
-            boxes = pred['boxes'].data.cpu().numpy()
-            labels = pred['labels'].data.cpu().numpy()
-            scores = pred['scores'].data.cpu().numpy()
+    #     for pred in predictions:
+    #         boxes = pred['boxes'].data.cpu().numpy()
+    #         labels = pred['labels'].data.cpu().numpy()
+    #         scores = pred['scores'].data.cpu().numpy()
 
-    # Perform NMS and confidence thresholding.
+    # Since this is a mantics model we can directly use model.predict
+    preds = model.predict(image_batch, detection_threshold=confidence_threshold)
+    # Perform NMS.
     # Once we know what to draw we can use the utility to simply draw the box
-    
+    # Just display this image
 
 
 

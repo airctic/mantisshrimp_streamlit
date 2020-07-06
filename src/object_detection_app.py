@@ -3,6 +3,7 @@ from zipfile import ZipFile
 import zipfile
 import numpy as np
 import config
+import random
 import os, urllib, cv2
 from model import *
 from utils import *
@@ -35,7 +36,6 @@ if __name__ == "__main__":
     readme_text = st.markdown(get_file_content_as_string("src/Info.md"))
     # print(readme_text)
     
-    
     # Once we have the dependencies, add a selector for the app mode on the sidebar.
     st.sidebar.title("What to do")
     app_mode = st.sidebar.selectbox("Choose the app mode",
@@ -53,28 +53,34 @@ if __name__ == "__main__":
         st.write("# Running the object detection App")
         st.write("- Adjust the thresholds, Upload a file and click predict")
         st.write("- It might take time to download the model.")
+        st.write("- To load a sample image just click on the load sample image")
         # run_the_app()
-        
+
         # Download the model or use from system.
         download_file(config.MODEL_BUCKET_URL, config.SAVE_PATH)
+
         confidence_threshold, overlap_threshold = object_detector_ui()
         object_type, min_objs, max_objs = object_selector_ui()
 
-        if(zipfile.is_zipfile(config.SAVE_PATH)):
-            with zipfile.ZipFile(config.SAVE_PATH, 'r') as zip: 
-                zip.extractall(config.DATA_PATH) 
-        
-        # Load Pytorch model here
-        # model = load_model(config.MODEL_PATH)
-        
-        # Create an option to run demo images.
+        if not os.exists(config.MODEL_PATH):
+            if(zipfile.is_zipfile(config.SAVE_PATH)):
+                with zipfile.ZipFile(config.SAVE_PATH, 'r') as zip: 
+                    zip.extractall(config.DATA_PATH) 
+            
+        if (st.button("Load a sample Image")):
+            # Just load an image from sample_images folder
+            random_image = random.choice(config.SAMPLE_IMAGES)
+            st.image(random_image)
+            image = Image.open(random_immage)
+            image = np.array(image)
+
         st.write("# Upload an Image to get its predictions")
 
-        img_file_buffer = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
+        img_file_buffer = st.file_uploader("", type=["png", "jpg", "jpeg"])
         if img_file_buffer is not None:
             image = Image.open(img_file_buffer)
             image = np.array(image) # Just for now
-            pred_image = load_image_tensor(img_file_buffer, device)
+            # pred_image = load_image_tensor(img_file_buffer, device)
             # output = predict(model, pred_image, , overlap_threshold)
             # preds = model.predict(images, detection_threshold=confidence_threshold)
             # Complete the predict code.
@@ -83,4 +89,10 @@ if __name__ == "__main__":
                 st.image(image, caption=f"You amazing image has shape {image.shape[0:2]}", use_column_width=True)
             else:
                 print("Invalid input")
+
+        # Load Pytorch model here
+
+        # model = load_model(config.MODEL_PATH)
+        # outs = predict(model, image_batch, confidence_threshold=confidence_threshold, overlap_threshold=overlap_threshold)
+        # Create an option to run demo images.
 
