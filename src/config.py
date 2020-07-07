@@ -24,3 +24,4 @@ IMG_SIZE = (224, 224) # If you need a image size
 # Optionally the user can simply provide classes which the model was trained on
 OBJECTS_TO_DETECT = ["Dog", "Cat", "Panda"]
 
+

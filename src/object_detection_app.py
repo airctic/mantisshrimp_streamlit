@@ -1,9 +1,11 @@
 import streamlit as st
 from zipfile import ZipFile 
 import zipfile
+from PIL import Image
 import numpy as np
 import config
 import random
+import torch
 import os, urllib, cv2
 from model import *
 from utils import *
@@ -63,6 +65,8 @@ if __name__ == "__main__":
         confidence_threshold, overlap_threshold = object_detector_ui()
         object_type, min_objs, max_objs = object_selector_ui()
 
+        # Extracts the downloaded zip model
+        # You can skip these model extract step if you directly have a .pt file in data folder
         if not os.path.exists(config.MODEL_PATH):
             if(zipfile.is_zipfile(config.SAVE_PATH)):
                 with zipfile.ZipFile(config.SAVE_PATH, 'r') as zip: 
@@ -74,13 +78,10 @@ if __name__ == "__main__":
             st.image(random_image)
             image = Image.open(random_image)
             image = np.array(image)
-            print(image.shape)
-            # image.reshape(226, 226)
-            image = np.transpose(image, (2, 1, 0))
-            image = np.expand_dims(image, axis=0)
-
+            # print(image.shape)
             image = image / 255.
-            print(image.shape)
+            image = image.astype(np.float32)
+            # print(image.shape)
             flag = 1
 
         st.write("# Upload an Image to get its predictions")
@@ -88,27 +89,26 @@ if __name__ == "__main__":
         img_file_buffer = st.file_uploader("", type=["png", "jpg", "jpeg"])
         if img_file_buffer is not None:
             image = Image.open(img_file_buffer)
-            image = np.array(image) # Just for now
-            # image = image.reshape(3, 266, 266)
-            image = np.expand_dims(image, axis=-1)
-            print(image.shape)
-            # pred_image = load_image_tensor(img_file_buffer, device)
+            # print(image.shape)
             # output = predict(model, pred_image, , overlap_threshold)
             # preds = model.predict(images, detection_threshold=confidence_threshold)
             # Complete the predict code.
 
-            if image is not None:
+            if image is not None:    
                 st.image(image, caption=f"You amazing image has shape {image.shape[0:2]}", use_column_width=True)
+                image = np.array(image) # Just for now
+                image = image / 255.
+                image = image.astype(np.float32)
                 flag = 1
             else:
                 print("Invalid input")
 
-        # Load Pytorch model here
-
+        # Load Pytorch model here. You can come here automatically if you have downloaded pt file itself.
         model = load_model(config.MODEL_PATH)
         
         if flag == 1:
             outs = predict(model, image, confidence_threshold=confidence_threshold, overlap_threshold=overlap_threshold)
-            print(outs)
+            # 
+            # print(outs)
         # Create an option to run demo images.
 
