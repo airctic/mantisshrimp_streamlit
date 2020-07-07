@@ -3,7 +3,7 @@
 # If user knows the model he has created, he can simply make use of create_model here
 
 
-# from mantisshrimp.models.mantis_rcnn import MantisFasterRCNN
+from mantisshrimp.models.mantis_rcnn import MantisFasterRCNN
 import torch
 import config
 import utils

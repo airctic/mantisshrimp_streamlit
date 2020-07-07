@@ -50,6 +50,7 @@ if __name__ == "__main__":
 
     elif app_mode == "Run the app":
         readme_text.empty()
+        flag = 0
         st.write("# Running the object detection App")
         st.write("- Adjust the thresholds, Upload a file and click predict")
         st.write("- It might take time to download the model.")
@@ -73,6 +74,14 @@ if __name__ == "__main__":
             st.image(random_image)
             image = Image.open(random_image)
             image = np.array(image)
+            print(image.shape)
+            # image.reshape(226, 226)
+            image = np.transpose(image, (2, 1, 0))
+            image = np.expand_dims(image, axis=0)
+
+            image = image / 255.
+            print(image.shape)
+            flag = 1
 
         st.write("# Upload an Image to get its predictions")
 
@@ -80,6 +89,9 @@ if __name__ == "__main__":
         if img_file_buffer is not None:
             image = Image.open(img_file_buffer)
             image = np.array(image) # Just for now
+            # image = image.reshape(3, 266, 266)
+            image = np.expand_dims(image, axis=-1)
+            print(image.shape)
             # pred_image = load_image_tensor(img_file_buffer, device)
             # output = predict(model, pred_image, , overlap_threshold)
             # preds = model.predict(images, detection_threshold=confidence_threshold)
@@ -87,12 +99,16 @@ if __name__ == "__main__":
 
             if image is not None:
                 st.image(image, caption=f"You amazing image has shape {image.shape[0:2]}", use_column_width=True)
+                flag = 1
             else:
                 print("Invalid input")
 
         # Load Pytorch model here
 
-        # model = load_model(config.MODEL_PATH)
-        # outs = predict(model, image_batch, confidence_threshold=confidence_threshold, overlap_threshold=overlap_threshold)
+        model = load_model(config.MODEL_PATH)
+        
+        if flag == 1:
+            outs = predict(model, image, confidence_threshold=confidence_threshold, overlap_threshold=overlap_threshold)
+            print(outs)
         # Create an option to run demo images.
 
