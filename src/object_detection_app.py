@@ -77,6 +77,7 @@ if __name__ == "__main__":
             random_image = random.choice(config.SAMPLE_IMAGES)
             st.image(random_image)
             image = Image.open(random_image)
+            image = image.convert("RGB")
             image = np.array(image)
             # print(image.shape)
             image = image / 255.
@@ -89,6 +90,7 @@ if __name__ == "__main__":
         img_file_buffer = st.file_uploader("", type=["png", "jpg", "jpeg"])
         if img_file_buffer is not None:
             image = Image.open(img_file_buffer)
+            image = image.convert("RGB")
             image = np.array(image) # Just for now
             image = image / 255.
             image = image.astype(np.float32)
