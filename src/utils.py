@@ -16,11 +16,17 @@ device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cp
 
 # Draws an image with boxes overlayed
 def draw_image_with_boxes(image, boxes, labels):
-    for i in range(len(labels)):
-        labels = labels[i]
-        # confidence = confidence[i]
-
-    pass
+    # for i in range(len(labels)):
+    #     label = labels[i]
+    #     bbox = boxes[i]
+    #     xmin = bbox[0]
+    #     ymin = bbox[1]
+    #     xmax = bbox[2]
+    #     ymax = bbox[3]
+    #     print(xmin, ymin, xmax, ymax)
+    #     # confidence = confidence[i]
+    
+    return image
 
 # Download a single file and make its content available as a string.
 @st.cache(show_spinner=False)

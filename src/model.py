@@ -61,9 +61,9 @@ def predict(model, image, confidence_threshold, overlap_threshold):
     print(scores)
     print(bboxes)
 
-    # image = utils.draw_image_with_boxes(image, bboxes, labels)
+    image = utils.draw_image_with_boxes(image, bboxes, labels)
     
-    return image, preds
+    return image, labels, scores
 
 
 

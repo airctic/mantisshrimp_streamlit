@@ -89,6 +89,9 @@ if __name__ == "__main__":
         img_file_buffer = st.file_uploader("", type=["png", "jpg", "jpeg"])
         if img_file_buffer is not None:
             image = Image.open(img_file_buffer)
+            image = np.array(image) # Just for now
+            image = image / 255.
+            image = image.astype(np.float32)
             # print(image.shape)
             # output = predict(model, pred_image, , overlap_threshold)
             # preds = model.predict(images, detection_threshold=confidence_threshold)
@@ -96,9 +99,6 @@ if __name__ == "__main__":
 
             if image is not None:    
                 st.image(image, caption=f"You amazing image has shape {image.shape[0:2]}", use_column_width=True)
-                image = np.array(image) # Just for now
-                image = image / 255.
-                image = image.astype(np.float32)
                 flag = 1
             else:
                 print("Invalid input")
@@ -107,7 +107,17 @@ if __name__ == "__main__":
         model = load_model(config.MODEL_PATH)
         
         if flag == 1:
-            outs = predict(model, image, confidence_threshold=confidence_threshold, overlap_threshold=overlap_threshold)
+            image_out, labels, scores = predict(model, image, confidence_threshold=confidence_threshold, 
+                                   overlap_threshold=overlap_threshold)
+            
+            if len(labels) == 0:
+                st.write("No relevant object detected in the image")
+            else:
+                st.image(image_out)
+                st.write("- Image with detection")
+                for i in range(len(labels)):
+                    st.write(f"Detected {labels[i]}, with confidence {scores[i]}")
+                
             # 
             # print(outs)
         # Create an option to run demo images.

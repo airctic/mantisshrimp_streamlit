@@ -19,7 +19,7 @@ SAMPLE_IMAGES = ["sample_images//cat0.jpg", "sample_images//cat1.jpg",
 
 NUM_CLASSES = 38 # Hyperparameters of model
 # Note this might be diffrent from len(OBJECTS_TO_DETECT) as you may have an extra background class.
-IMG_SIZE = (224, 224) # If you need a image size
+# IMG_SIZE = (224, 224) # If you need a image size
 
 # Optionally the user can simply provide classes which the model was trained on
 OBJECTS_TO_DETECT = ["Dog", "Cat", "Panda"]
