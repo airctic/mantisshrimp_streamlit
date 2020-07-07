@@ -3,10 +3,13 @@
 # If user knows the model he has created, he can simply make use of create_model here
 
 from mantisshrimp.models.mantis_rcnn import MantisFasterRCNN
+from mantisshrimp.visualize.show_data import show_pred
 import torch
+import numpy as np
 import config
 import utils
 import streamlit as st
+import matplotlib.pyplot as plt
 
 __all__ = ["create_model", "load_model", "predict"]
 
@@ -48,6 +51,7 @@ def predict(model, image, confidence_threshold, overlap_threshold):
     # Since this is a mantiss model we can directly use model.predict
     # Mantisshrimpm eases out this processing.
     preds = model.predict([image], detection_threshold=confidence_threshold)
+    print(type(preds))
     # Perform NMS.
     # Once we know what to draw we can use the utility to simply draw the box
     # Just display this image
@@ -57,13 +61,13 @@ def predict(model, image, confidence_threshold, overlap_threshold):
     scores = preds[0]['scores']
     bboxes = preds[0]['bboxes']
 
-    print(labels)
-    print(scores)
-    print(bboxes)
+    # Show pred helps us to vizualize the data quickly. It is a helper function in mantisshrimp
 
-    image = utils.draw_image_with_boxes(image, bboxes, labels)
-    
-    return image, labels, scores
+    show_pred(image, preds[0], show=False)
+    # img = np.fromstring(canvas.to_string_rgb(), dtype='uint8')
+    fig = plt.gcf()
+    fig_arr = np.array(fig.canvas.renderer.buffer_rgba())
+    return fig_arr, labels, scores
 
 
 
