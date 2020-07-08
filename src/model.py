@@ -63,7 +63,7 @@ def predict(model, image, confidence_threshold, overlap_threshold):
 
     # Show pred helps us to vizualize the data quickly. It is a helper function in mantisshrimp
 
-    show_pred(image, preds[0], show=False)
+    show_pred(image, preds[0], show=False, classes=config.OBJECTS_TO_DETECT)
     # img = np.fromstring(canvas.to_string_rgb(), dtype='uint8')
     fig = plt.gcf()
     fig.canvas.draw()
