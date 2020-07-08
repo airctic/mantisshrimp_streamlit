@@ -51,7 +51,7 @@ def predict(model, image, confidence_threshold, overlap_threshold):
     # Since this is a mantiss model we can directly use model.predict
     # Mantisshrimpm eases out this processing.
     preds = model.predict([image], detection_threshold=confidence_threshold)
-    print(type(preds))
+    # print(type(preds))
     # Perform NMS.
     # Once we know what to draw we can use the utility to simply draw the box
     # Just display this image
@@ -59,13 +59,14 @@ def predict(model, image, confidence_threshold, overlap_threshold):
     # print(preds[0])
     labels = preds[0]['labels']
     scores = preds[0]['scores']
-    bboxes = preds[0]['bboxes']
+    # bboxes = preds[0]['bboxes']
 
     # Show pred helps us to vizualize the data quickly. It is a helper function in mantisshrimp
 
     show_pred(image, preds[0], show=False)
     # img = np.fromstring(canvas.to_string_rgb(), dtype='uint8')
     fig = plt.gcf()
+    fig.canvas.draw()
     fig_arr = np.array(fig.canvas.renderer.buffer_rgba())
     return fig_arr, labels, scores
 

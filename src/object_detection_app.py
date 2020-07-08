@@ -115,7 +115,7 @@ if __name__ == "__main__":
             if len(labels) == 0:
                 st.write("No relevant object detected in the image")
             else:
-                st.image(image_out)
+                st.image(image_out, use_column_width=True)
                 st.write("- Image with detection")
                 for i in range(len(labels)):
                     st.write(f"Detected {labels[i]}, with confidence {scores[i]}")
