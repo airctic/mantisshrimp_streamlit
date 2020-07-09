@@ -8,25 +8,11 @@ import cv2
 import torchvision.transforms as T
 import torch
 
-__all__ = ["draw_image_with_boxes", "get_file_content_as_string", "show_image", 
-"download_file", "load_image_tensor", "load_image_tensor", "load_image_file"]
+__all__ = ["get_file_content_as_string", "show_image", "download_file", 
+"load_image_tensor", "load_image_tensor", "load_image_file"]
 
 # Some utils which users can use.
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-
-# Draws an image with boxes overlayed
-def draw_image_with_boxes(image, boxes, labels):
-    # for i in range(len(labels)):
-    #     label = labels[i]
-    #     bbox = boxes[i]
-    #     xmin = bbox[0]
-    #     ymin = bbox[1]
-    #     xmax = bbox[2]
-    #     ymax = bbox[3]
-    #     print(xmin, ymin, xmax, ymax)
-    #     # confidence = confidence[i]
-    
-    return image
 
 # Download a single file and make its content available as a string.
 @st.cache(show_spinner=False)
