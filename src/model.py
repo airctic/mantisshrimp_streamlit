@@ -49,7 +49,7 @@ def predict(model, image, confidence_threshold, overlap_threshold):
     #         scores = pred['scores'].data.cpu().numpy()
 
     # Since this is a mantiss model we can directly use model.predict
-    # Mantisshrimpm eases out this processing.
+    # Mantisshrimp eases out this processing.
     preds = model.predict([image], detection_threshold=confidence_threshold)
     # print(type(preds))
     # Perform NMS.

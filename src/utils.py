@@ -71,10 +71,13 @@ def load_image_tensor(image_path, device):
 
 @st.cache(show_spinner=False)
 def load_image_file(image_path):
-    image = cv2.imread(image_path, cv2.IMREAD_COLOR)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    image = Image.open(image_path)
+    image = image.convert("RGB")
+    image = np.array(image)
+    image = image / 255.
+    image = image.astype(np.float32)
     return image
-
+    
 # Utility to beautifully download a file from its url
 def download_file(file_path, save_path):
     # Don't download the file twice. (If possible, verify the download using the file length.)
