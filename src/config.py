@@ -8,8 +8,9 @@ DATA_PATH = "data/"
 MODEL_PATH = "data//weights-384px-adam2++.pth"
 
 # Some sample images over internet that you may like to give. Enter urls of images here.
-SAMPLE_IMAGES = ["sample_images//cat0.jpg", "sample_images//cat1.jpg", 
-"sample_images//cat2.jpg", "sample_images//dog0.jpg", "sample_images//dog1.jpg"]
+SAMPLE_IMAGES = ["sample_images//cat0.jpg", "sample_images//cat1.jpg",
+"sample_images//dog0.jpg", "sample_images//dog1.jpg", "sample_images//dog2.jpg", 
+"sample_images//dog3.jpg", "sample_images//dog4.jpg", "sample_images//dog5.jpg"]
 
 NUM_CLASSES = 38 # Hyperparameters of model
 # Note this might be diffrent from len(OBJECTS_TO_DETECT) as you may have an extra background class.
