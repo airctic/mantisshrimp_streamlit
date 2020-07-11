@@ -24,7 +24,7 @@ def object_selector_ui():
     st.sidebar.markdown("# Objects to detect")
     # The user can pick which type of object to search for.
     object_type = st.sidebar.selectbox(
-        "Search for which objects?", config.OBJECTS_TO_DETECT
+        "Search for which objects?", config.OBJECTS_TO_DETECT[1:]
     )
     # The user can select a range for how many of the selected objecgt should be present.
     min_objs, max_objs = st.sidebar.slider(
