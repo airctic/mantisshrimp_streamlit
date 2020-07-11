@@ -8,26 +8,61 @@ DATA_PATH = "data/"
 MODEL_PATH = "data//weights-384px-adam2++.pth"
 
 # Some sample images over internet that you may like to give. Enter urls of images here.
-SAMPLE_IMAGES = ["sample_images//cat0.jpg", "sample_images//cat1.jpg",
-"sample_images//dog0.jpg", "sample_images//dog1.jpg", "sample_images//dog2.jpg", 
-"sample_images//dog3.jpg", "sample_images//dog4.jpg", "sample_images//dog5.jpg"]
+SAMPLE_IMAGES = [
+    "sample_images//cat0.jpg",
+    "sample_images//cat1.jpg",
+    "sample_images//dog0.jpg",
+    "sample_images//dog1.jpg",
+    "sample_images//dog2.jpg",
+    "sample_images//dog3.jpg",
+    "sample_images//dog4.jpg",
+    "sample_images//dog5.jpg",
+]
 # SAMPLE_IMAGES = ["sample_images//dog4.jpg"]
 
-NUM_CLASSES = 38 # Hyperparameters of model
+NUM_CLASSES = 38  # Hyperparameters of model
 # Note this might be diffrent from len(OBJECTS_TO_DETECT) as you may have an extra background class.
 
 # IMG_SIZE = (224, 224) # If you need a image size
 
 # Optionally the user can simply provide classes which the model was trained on
-OBJECTS_TO_DETECT = ['background', 'Abyssinian', 'Bengal', 
-'Birman', 'Bombay', 'British_Shorthair', 
-'Egyptian_Mau', 'Maine_Coon', 'Persian', 'Ragdoll', 
-'Russian_Blue', 'Siamese', 'Sphynx', 'american_bulldog',
-'american_pit_bull_terrier', 'basset_hound', 'beagle', 'boxer', 
-'chihuahua', 'english_cocker_spaniel', 'english_setter', 'german_shorthaired', 
-'great_pyrenees', 'havanese', 'japanese_chin', 'keeshond', 'leonberger', 
-'miniature_pinscher', 'newfoundland', 'pomeranian', 'pug', 'saint_bernard', 
-'samoyed', 'scottish_terrier', 'shiba_inu', 'staffordshire_bull_terrier', 
-'wheaten_terrier', 'yorkshire_terrier']
-
-
+OBJECTS_TO_DETECT = [
+    "background",
+    "Abyssinian",
+    "Bengal",
+    "Birman",
+    "Bombay",
+    "British_Shorthair",
+    "Egyptian_Mau",
+    "Maine_Coon",
+    "Persian",
+    "Ragdoll",
+    "Russian_Blue",
+    "Siamese",
+    "Sphynx",
+    "american_bulldog",
+    "american_pit_bull_terrier",
+    "basset_hound",
+    "beagle",
+    "boxer",
+    "chihuahua",
+    "english_cocker_spaniel",
+    "english_setter",
+    "german_shorthaired",
+    "great_pyrenees",
+    "havanese",
+    "japanese_chin",
+    "keeshond",
+    "leonberger",
+    "miniature_pinscher",
+    "newfoundland",
+    "pomeranian",
+    "pug",
+    "saint_bernard",
+    "samoyed",
+    "scottish_terrier",
+    "shiba_inu",
+    "staffordshire_bull_terrier",
+    "wheaten_terrier",
+    "yorkshire_terrier",
+]
