@@ -1,4 +1,4 @@
-APP_NAME = "src/object_detection_app.py"
+APP_NAME = "app.py"
 MODEL_BUCKET_URL = "https://mantisshrimp-models.s3.us-east-2.amazonaws.com/weights-384px-adam2%2B%2B.pth.zip"
 SAVE_PATH = "data/demo_model.pth.zip"
 DATA_PATH = "data/"
@@ -214,7 +214,7 @@ def predict(model, image, confidence_threshold, overlap_threshold):
     #         labels = pred['labels'].data.cpu().numpy()
     #         scores = pred['scores'].data.cpu().numpy()
 
-    # Since this is a mantiss model we can directly use model.predict
+    # Since this is a mantis model we can directly use model.predict
     # Mantisshrimp eases out this processing.
     preds = model.predict([image], detection_threshold=confidence_threshold)
     labels = preds[0]["labels"]
@@ -253,9 +253,9 @@ def object_selector_ui():
 if __name__ == "__main__":
     # Get the readme text from readme file
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-    readme_text = st.markdown(get_file_content_as_string("src/Info.md"))
+    readme_text = st.markdown(get_file_content_as_string("Info.md"))
     # Once we have the dependencies, add a selector for the app mode on the sidebar.
-    st.sidebar.title("What to do")
+    st.sidebar.title("What to do ?")
     app_mode = st.sidebar.selectbox(
         "Choose the app mode", ["About the App", "Run the app", "Show the source code"]
     )
@@ -304,7 +304,7 @@ if __name__ == "__main__":
             if image is not None:
                 st.image(
                     image,
-                    caption=f"You amazing image has shape {image.shape[0:2]}",
+                    caption=f"Your amazing image has shape {image.shape[0:2]}",
                     use_column_width=True,
                 )
                 flag = 1
