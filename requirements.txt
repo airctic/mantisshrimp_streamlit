@@ -1,5 +1,5 @@
-https://download.pytorch.org/whl/cpu/torch-1.5.1%2Bcpu-cp36-cp36m-linux_x86_64.whl
-https://download.pytorch.org/whl/cpu/torchvision-0.6.1%2Bcpu-cp36-cp36m-linux_x86_64.whl
+torch
+torchvision
 git+git://github.com/lgvaz/mantisshrimp.git
 opencv-python==4.2.0.34
 Pillow==7.1.2
