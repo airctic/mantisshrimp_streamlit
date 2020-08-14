@@ -1,8 +1,10 @@
 APP_NAME = "app.py"
-MODEL_BUCKET_URL = "https://mantisshrimp-models.s3.us-east-2.amazonaws.com/weights-384px-adam2%2B%2B.pth.zip"
+MODEL_BUCKET_URL = (
+    "https://mantisshrimp-models.s3.us-east-2.amazonaws.com/pets_faster_resnetfpn50.zip"
+)
 SAVE_PATH = "data/demo_model.pth.zip"
 DATA_PATH = "data/"
-MODEL_PATH = "data//weights-384px-adam2++.pth"
+MODEL_PATH = "data/pets_faster_resnetfpn50.pth"
 
 # Sample images in the sample_images folder
 SAMPLE_IMAGES = [
@@ -71,9 +73,9 @@ import torch
 import torchvision.transforms as T
 import cv2
 import os, urllib
-from mantisshrimp.models.mantis_rcnn import MantisFasterRCNN
-from mantisshrimp.visualize.show_data import show_pred
 import matplotlib.pyplot as plt
+from mantisshrimp.all import *
+from mantisshrimp import datasets, faster_rcnn, show_pred
 
 
 @st.cache(show_spinner=False)
@@ -180,7 +182,7 @@ def download_file(file_path, save_path):
 
 def create_model():
     """ Instatiate your Mantis Model Here """
-    model = MantisFasterRCNN(num_classes=NUM_CLASSES)
+    model = faster_rcnn.model(num_classes=NUM_CLASSES)
     return model
 
 
@@ -216,10 +218,14 @@ def predict(model, image, confidence_threshold, overlap_threshold):
 
     # Since this is a mantis model we can directly use model.predict
     # Mantisshrimp eases out this processing.
-    preds = model.predict([image], detection_threshold=confidence_threshold)
+    eval_ds = Dataset.from_images([image])
+    batch, samples = faster_rcnn.build_infer_batch(eval_ds)
+    preds = faster_rcnn.predict(
+        model=model, batch=batch, detection_threshold=confidence_threshold
+    )
     labels = preds[0]["labels"]
     scores = preds[0]["scores"]
-    show_pred(image, preds[0], show=False, classes=OBJECTS_TO_DETECT)
+    show_pred(image, preds[0], show=False, class_map=datasets.pets.class_map())
     fig = plt.gcf()
     fig.canvas.draw()
     fig_arr = np.array(fig.canvas.renderer.buffer_rgba())
