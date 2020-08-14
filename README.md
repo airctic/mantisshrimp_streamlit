@@ -4,20 +4,26 @@
 
 ## To run the app
 
-- Clone the repo `git clone https://github.com/oke-aditya/mantisshrimp_streamlit.git`.
-- Install the requirements `pip install -r requirements.txt`
-- Run the streamlit app by running following in your terminal `streamlit run app.py`
-- Open a browser and go to http://localhost:8501/
+### Install dependencies
+Install mantisshrimp:  
+```bash
+pip install git+git://github.com/airctic/mantisshrimp.git
+```
 
-## To create your own app from this template
+Install streamlit:  
+```bash
+pip install streamlit
+```
 
-- The dev branch of this repo provides a modularized and more hackable code.
-- Clone the repo `git clone https://github.com/oke-aditya/mantisshrimp_streamlit.git`.
-- Install the requirements `pip install -r requirements.txt`
-- Checkout to dev branch `git checkout dev` (In case you don't have it do a `git fetch`)
-- Edit the `src/info.md` to add information about your app.
-- Edit the config file for giving your model and classes to detect.
-- Run the app `streamlit run src\object_detction_app.py`.
+Clone the repo:
+```bash
+git clone https://github.com/airctic/mantisshrimp_streamlit.git
+```
 
-If you like this repo and project Mantisshrimp do visit us and give us a star on [Mantisshrimp](https://github.com/lgvaz/mantisshrimp) repository. 
-
+### Run!
+ Run the streamlit app:
+ ```bash
+ streamlit run app.py
+ ```
+ 
+ Open a browser and go to http://localhost:8501/
