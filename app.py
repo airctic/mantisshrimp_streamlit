@@ -218,7 +218,8 @@ def predict(model, image, confidence_threshold, overlap_threshold):
 
     # Since this is a mantis model we can directly use model.predict
     # Mantisshrimp eases out this processing.
-    eval_ds = Dataset.from_images([image])
+    transformations = tfms.A.Adapter([tfms.A.Resize(384, 384), tfms.A.Normalize()])
+    eval_ds = Dataset.from_images([image], transformations)
     batch, samples = faster_rcnn.build_infer_batch(eval_ds)
     preds = faster_rcnn.predict(
         model=model, batch=batch, detection_threshold=confidence_threshold
